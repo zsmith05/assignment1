@@ -42,24 +42,56 @@ public class LogEntry<item> {
         sb.append("null");
         return sb.toString();
     }
+
+    public boolean contains(String log, String keyword) {
+        return log.contains(keyword);
+    }
+
     public static void main(String[] args) throws FileNotFoundException {
+        int error = 0;
+        int warn = 0;
+        int info = 0;
+        int mem = 0;
         File logentry = new File("log-data.csv");
         LogEntry<String> logs = new LogEntry<String>();
+        ErrorStack<String> errorStack = new ErrorStack<>();
 
         Scanner reader = new Scanner(logentry);
         while(reader.hasNextLine()){
             String log = reader.nextLine();
             logs.enqueue(log);
 
-
         }
-
         while(!logs.isEmpty()){
-            logs.dequeue();
-            if()
+            String currentLog = logs.dequeue();
+            if(logs.contains(currentLog, "ERROR")){
+                errorStack.push(currentLog);
+            }
+
+            if (logs.contains(currentLog, "ERROR")) {
+                error++;
+            } else if (logs.contains(currentLog, "WARN")) {
+                warn++;
+            } else if (logs.contains(currentLog, "INFO")) {
+                info++;
+            }
+
+            if((logs.contains(currentLog, "WARN")) && (logs.contains(currentLog, "Memory")) ){
+                mem++;
+
+            }
+
         }
 
-        System.out.println(logs);
+
+        System.out.println("There were: " + error + " ERROR log level entries.");
+        System.out.println("There were: " + warn + " WARN log level entries" );
+        System.out.println("There were: " + info + " INFO log level entries");
+        System.out.println("There were: " + mem + " WARN Memory log level entries");
+
+
+
+
 
     }
 
