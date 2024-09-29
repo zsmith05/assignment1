@@ -6,6 +6,7 @@ public class ErrorStack<Item> {
     private Node first;
     private int n;
 
+
     private class Node{
         Item item;
         Node next;
@@ -35,25 +36,20 @@ public class ErrorStack<Item> {
         return item;
     }*/
 
-    public static void main(String[] args){
-        ErrorStack<String> errorStack = new ErrorStack<>();
-
-        try{
-            File logentry = new File("log-data.csv");
-            Scanner scanner = new Scanner(logentry);
-
-            while(scanner.hasNextLine()){
-                String log = scanner.nextLine();
-                // Check if the log line contains "ERROR"
-                if(log.contains("ERROR")){
-                    errorStack.push(log);
-                }
-            }
-            scanner.close();
+    public String toString() {
+        if (isEmpty()) {
+            return "No errors found.";
         }
 
-        catch(FileNotFoundException e){
-            System.out.println("File not found: " + e.getMessage());
+        StringBuilder sb = new StringBuilder();
+        Node current = first;
+        while (current != null) {
+            sb.append(current.item).append("\n");
+            current = current.next;
         }
+
+        return sb.toString();
     }
+
+
 }
