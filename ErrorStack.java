@@ -43,9 +43,12 @@ public class ErrorStack<Item> {
 
         StringBuilder sb = new StringBuilder();
         Node current = first;
-        while (current != null) {
+        int count= 0;
+        
+        while (current != null && count < 100) {
             sb.append(current.item).append("\n");
             current = current.next;
+            count++;
         }
 
         return sb.toString();
