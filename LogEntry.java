@@ -85,6 +85,8 @@ public class LogEntry<item> {
 
 
         System.out.println("There were: " + error + " ERROR log level entries.");
+        System.out.println("Last 100 error messages: ");
+        System.out.println(errorStack.toString());
         System.out.println("There were: " + warn + " WARN log level entries" );
         System.out.println("There were: " + info + " INFO log level entries");
         System.out.println("There were: " + mem + " WARN Memory log level entries");
