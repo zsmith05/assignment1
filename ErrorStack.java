@@ -29,12 +29,12 @@ public class ErrorStack<Item> {
     }
 
     //Pop function may not be necessary
-    /*public Item pop(){
+    public Item pop(){
         Item item = first.item;
         first = first.next;
         n--;
         return item;
-    }*/
+    }
 
     public String toString() {
         if (isEmpty()) {
